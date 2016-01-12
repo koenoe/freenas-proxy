@@ -4,43 +4,47 @@ My FreeNAS proxy using Nginx reverse proxy to redirect traffic (80/443) to inter
 ## Installation guide
 
 ### Configure Nginx
-Create a standard jail via the UI of FreeNAS. Call it 'webserver' and login at FreeNAS via SSH.
+Create a standard jail via the UI of FreeNAS. Call it 'webserver' and login at FreeNAS (which is 192.168.192.34 in my case) via SSH in your Terminal:
+```sh
+ssh root@192.168.192.34
+```
 
 Identify jail 'webserver' and login. Install Git and Nginx:
-``
+```sh
 jls
 jexec <ID> csh
 
 pkg upgrade
-pkg install nano
-pkg install git
-pkg install nginx
-``
+pkg install nano git nginx
+```
 
 Open the file '/etc/rc.conf' and add following line:
-``
+```sh
 nginx_enable="YES"
-``
+```
 
 Start Nginx:
-``
+```sh
 service nginx start
-``
+```
 
 ### Install SSL certificate in jail
-Download the certificate at TransIP. Unzip, open Terminal and point to the folder. Merge the .crt files into one:
-``
+Download the certificate at TransIP. Unzip, open a new Terminal window and point to the folder. Merge the .crt files into one:
+```sh
 cat cabundle.crt certificate.crt > ssl-bundle.crt
-``
+```
 
-Secure the bundled certificate and key to the 'webserver' jail via FreeNAS (which is 192.168.192.34 in my case)
-``
-scp ssl-bundle.crt root@192.168.192.34:/mnt/tank/jails/webserver/usr/local/etc/nginx
-scp certificate.key root@192.168.192.34:/mnt/tank/jails/webserver/usr/local/etc/nginx
-``
+Secure the bundled certificate and key to the 'webserver' jail via FreeNAS:
+```sh
+scp ssl-bundle.crt certificate.key root@192.168.192.34:/mnt/tank/jails/webserver/usr/local/etc/nginx
+```
 
 ### Clone this repository
-Blabla
+```sh
+cd /root && git clone https://github.com/koenoe/freenas-proxy.git
+```
 
-### Create a symlink in /etc/nginx/sites-enabled to point to our vhost
-Blabla
+### Create a symlink for Nginx configuration
+```sh
+cd /usr/local/etc/nginx && mv nginx.conf nginx.conf.backup && ln -s /root/freenas-proxy/nginx.conf nginx.conf 
+```
