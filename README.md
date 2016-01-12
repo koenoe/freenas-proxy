@@ -31,12 +31,17 @@ service nginx start
 ### Install SSL certificate in jail
 Download the certificate at TransIP. Unzip, open a new Terminal window and point to the folder. Merge the .crt files into one:
 ```sh
-cat cabundle.crt certificate.crt > ssl-bundle.crt
+cat certificate.crt cabundle.crt > ssl-bundle.crt
 ```
 
 Secure the bundled certificate and key to the 'webserver' jail via FreeNAS:
 ```sh
 scp ssl-bundle.crt certificate.key root@192.168.192.34:/mnt/tank/jails/webserver/usr/local/etc/nginx
+```
+
+Login again in FreeNAS via ssh and generate dhparam.pem file for extra security:
+```sh
+cd /usr/local/etc/nginx && openssl dhparam -out dhparam.pem 4096
 ```
 
 ### Clone this repository
@@ -46,5 +51,12 @@ cd /root && git clone https://github.com/koenoe/freenas-proxy.git
 
 ### Create a symlink for Nginx configuration
 ```sh
-cd /usr/local/etc/nginx && mv nginx.conf nginx.conf.backup && ln -s /root/freenas-proxy/nginx.conf nginx.conf 
+cd /usr/local/etc/nginx && mv nginx.conf nginx.conf.backup && ln -s /root/freenas-proxy/nginx.conf nginx.conf
+```
+
+### Start Nginx
+Make sure the log folder exist and restart Nginx:
+```sh
+cd /usr/local/etc/nginx && mkdir logs
+service nginx restart
 ```
