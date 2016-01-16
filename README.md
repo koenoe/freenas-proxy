@@ -4,9 +4,9 @@ My FreeNAS proxy using Nginx reverse proxy to redirect traffic (80/443) to inter
 ## Installation guide
 
 ### Configure Nginx
-Create a standard jail via the UI of FreeNAS. Call it 'webserver' and login at FreeNAS (which is 192.168.192.34 in my case) via SSH in your Terminal:
+Create a standard jail via the UI of FreeNAS. Call it 'webserver' and login at FreeNAS via SSH in your Terminal:
 ```sh
-ssh root@192.168.192.34
+ssh root@freenas.local
 ```
 
 Identify jail 'webserver' and login. Install Git and Nginx:
@@ -36,7 +36,7 @@ cat certificate.crt cabundle.crt > ssl-bundle.crt
 
 Secure the bundled certificate and key to the 'webserver' jail via FreeNAS:
 ```sh
-scp ssl-bundle.crt certificate.key root@192.168.192.34:/mnt/tank/jails/webserver/usr/local/etc/nginx
+scp ssl-bundle.crt certificate.key root@freenas.local:/mnt/tank/jails/webserver/usr/local/etc/nginx
 ```
 
 Login again in FreeNAS via ssh and generate dhparam.pem file for extra security:
