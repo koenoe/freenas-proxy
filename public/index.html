@@ -1,17 +1,118 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Welcome to the Belt Road</title>
 
-  <title>BELT ROAD</title>
+  <link href='https://fonts.googleapis.com/css?family=Leckerli+One|Lato:400,700,300,900' rel='stylesheet' type='text/css'>
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #fb535c;
+      color: #fff;
+      padding: 0;
+      margin: 0;
+    }
+
+    h1 {
+      font-family: 'Leckerli One', cursive;
+      font-size: 175px;
+      margin: 0 0 50px 0;
+      padding: 0;
+      line-height: 1;
+    }
+
+    body > div {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      display: table;
+    }
+
+    div {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+    }
+
+    a {
+      text-decoration: none;
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      background: none;
+      cursor: pointer;
+      padding: 15px 50px;
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      outline: none;
+      position: relative;
+      border: 3px solid #fff;
+      color: #fff;
+      -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+      transition: all 0.3s;
+      margin: 0 10px;
+    }
+
+    a:after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+      transition: all 0.3s;
+    }
+
+    a:hover,
+    a:active {
+      color: #fb535c;
+      background: #fff;
+    }
+
+    @media (max-width: 768px) {
+      body > div {
+        padding: 25px;
+      }
+
+      h1 {
+        font-size: 120px;
+      }
+
+      a {
+        display: block;
+        width: 100%;
+        margin: 20px 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 90px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <ul>
-    <li><a href="/sabnzbd">SABnzbd</a></li>
-    <li><a href="/couchpotato">CouchPotato</a></li>
-    <li><a href="/sonarr">Sonarr</a></li>
-  </ul>
+  <div>
+    <div>
+      <h1>Belt Road</h1>
+      <a href="/sabnzbd">SABnzbd</a>
+      <a href="/couchpotato">CouchPotato</a>
+      <a href="/sonarr">Sonarr</a>
+    </div>
+  </div>
 </body>
+
 </html>
